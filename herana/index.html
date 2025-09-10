@@ -1,28 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MY portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MY Portfolio</title>
+  <link rel="stylesheet" href="style.css">
 
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    section {
+      padding: 50px;
+      min-height: 100vh;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .loading {
+      text-align: center;
+      font-style: italic;
+    }
+  </style>
 </head>
-
 <body>
 
-    <p> my portfolio</p>
-    
-    <p> hi' im heljie herana </p>
-    <div class="hero">
-        <a class="" href="#Home">Home</a>
-        <a href="#About">About</a>
-        <a href="#Project">Project</a>
-        <a href="#certificate">Certificate</a>
-        <a href="#Contact">Contact</a>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="#index" data-page="index.html"><i class="fa-solid fa-home"></i> Home</a>
+    <a href="#about" data-page="about.html"><i class="fa-solid fa-user"></i> About Me</a>
+    <a href="#certificate" data-page="certificate.html"><i class="fa-solid fa-certificate"></i> Certificate</a>
+    <a href="#projects" data-page="project.html"><i class="fa-solid fa-diagram-project"></i> Project</a>
+    <a href="#contact" data-page="contactform.html"><i class="fa-solid fa-envelope"></i> Contact Me</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div class="content-text">
+      <section id="index">
+        <h1>Hi! I'm <span>Heljie</span>,</h1>
+        <h2>A Web Developer</h2>
+        <div class="buttons">
+         
+        </div>
+        <div class="content"></div>
+      </section>
+    </div>
+
+    <div class="profile">
+      <img src="h.png" alt="My Photo">
+
+      <!-- Social Icons -->
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
       </div>
-    
-    
-   
+    </div>
+  </div>
+
+  <!-- Sections (load content dynamically) -->
+  <section id="about"><h2>About Me</h2><div class="content"></div></section>
+  <section id="certificate"><h2>Certificates</h2><div class="content"></div></section>
+  <section id="projects"><h2>Projects</h2><div class="content"></div></section>
+  <section id="contact"><h2>Contact Me</h2><div class="content"></div></section>
+
+  <script>
+    // Load external HTML into each section
+    document.querySelectorAll(".sidebar a").forEach(link => {
+      link.addEventListener("click", e => {
+        const sectionId = link.getAttribute("href").substring(1);
+        const page = link.dataset.page;
+        const container = document.querySelector(`#${sectionId} .content`);
+
+        if (container) {
+          container.innerHTML = "<p class='loading'>Loading...</p>";
+
+          fetch(page)
+            .then(res => res.text())
+            .then(data => {
+              container.innerHTML = data;
+            })
+            .catch(() => {
+              container.innerHTML = "<p>Error loading content.</p>";
+            });
+        }
+      });
+    });
+
+    // Auto-load all sections on page load
+    window.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".sidebar a").forEach(link => {
+        const sectionId = link.getAttribute("href").substring(1);
+        const page = link.dataset.page;
+        const container = document.querySelector(`#${sectionId} .content`);
+
+        if (container) {
+          fetch(page)
+            .then(res => res.text())
+            .then(data => {
+              container.innerHTML = data;
+            });
+        }
+      });
+    });
+  </script>
 </body>
 </html>

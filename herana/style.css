@@ -1,0 +1,109 @@
+html {
+  scroll-behavior: smooth; /* smooth scroll */
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 220px;              /* sidebar width */
+  background: #111;          /* dark background */
+  padding-top: 60px;         /* spacing from top */
+  transition: transform 0.3s ease;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.sidebar a i {
+  margin-right: 10px;
+}
+
+.sidebar a:hover {
+  background: #575757;
+}
+
+/* Main content shifts when sidebar visible */
+.main {
+  margin-left: 220px; /* match sidebar width */
+  padding: 40px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: margin-left 0.3s ease;
+}
+
+/* Hide sidebar when toggled */
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+.main.full {
+  margin-left: 0;
+}
+
+/* Hamburger button */
+.hamburger {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 24px;
+  color: white;
+  background: #333;
+  border: none;
+  padding: 10px 12px;
+  cursor: pointer;
+  z-index: 1000;
+  border-radius: 6px;
+}
+
+/* Profile */
+.profile {
+  display: flex;
+  flex-direction: column;   /* stack image + icons vertically */
+  align-items: center;      /* center horizontally */
+  justify-content: center;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile img {
+  width: 180px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Social media */
+.social-icons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;  /* center icons */
+}
+
+.social-icons a {
+  margin: 0 10px;
+  font-size: 24px;
+  color: #fff; /* white icons to match sidebar */
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  color: #0077ff; /* hover color */
+}
